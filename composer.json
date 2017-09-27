@@ -1,0 +1,29 @@
+{
+    "name": "root/file-iterator",
+    "keywords": ["file", "iterator"],
+    "license": "MIT",
+    "description": "file iterator implements seekable iterator",
+    "authors": [
+        {
+            "name": "Alexander Satretdinov",
+            "email": "a.satretdinov@vsemayki.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    }
+}
