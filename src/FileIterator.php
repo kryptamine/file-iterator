@@ -22,8 +22,18 @@ class FileIterator implements SeekableIterator
      */
     private $handler;
 
+    /**
+     * @var int
+     */
     private $fileSize;
 
+    /**
+     * FileIterator constructor.
+     *
+     * @param string $path
+     *
+     * @throws \Exception
+     */
     public function __construct(string $path)
     {
         if (!file_exists($path)) {
@@ -34,17 +44,28 @@ class FileIterator implements SeekableIterator
         $this->fileSize = filesize($path);
     }
 
+    /**
+     * @return int
+     */
     public function key(): int
     {
         return (int)$this->position;
     }
 
+    /**
+     * @return int
+     */
     public function next(): int
     {
         ++$this->position;
     }
 
-    public function seek($position)
+    /**
+     * @param int $position
+     *
+     * @return int
+     */
+    public function seek($position): int
     {
         $this->position = $position;
 
@@ -55,13 +76,19 @@ class FileIterator implements SeekableIterator
         fseek($this->handler, $this->position, SEEK_SET);
     }
 
-    public function rewind()
+    /**
+     * @return bool
+     */
+    public function rewind(): bool
     {
         $this->position = 0;
 
         rewind($this->handler);
     }
 
+    /**
+     * @return string
+     */
     public function current()
     {
         $this->seek($this->position);
@@ -69,6 +96,9 @@ class FileIterator implements SeekableIterator
         return fread($this->handler, static::ONE_BYTE);
     }
 
+    /**
+     * @return bool
+     */
     public function valid(): bool
     {
         return !feof($this->handler) && $this->position <= $this->fileSize;
