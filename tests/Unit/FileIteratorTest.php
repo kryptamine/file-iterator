@@ -43,4 +43,26 @@ class FileIteratorTest extends TestCase
         $this->assertEquals(0, $fileIterator->key());
     }
 
+    /**
+     * @param $fileIterator FileIterator
+     * @depends testThatCanOpenFile
+     */
+    public function testThatValid(FileIterator $fileIterator)
+    {
+        $fileIterator->seek(10);
+
+        $this->assertTrue($fileIterator->valid());
+    }
+
+    /**
+     * @param $fileIterator FileIterator
+     * @depends testThatCanOpenFile
+     */
+    public function testNext(FileIterator $fileIterator)
+    {
+        $fileIterator->next();
+
+        $this->assertTrue(1, $fileIterator->key());
+    }
+
 }
